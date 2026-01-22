@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-container
+    ports:
+      - "3306:3306"
+    volumes:
+      - vtest:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: edudb
+      MYSQL_USER: jdbctest
+      MYSQL_PASSWORD: jdbctest
+    networks:
+      - springboot-mysql-net
+
+  springedu:
+    image: cyannara/edu:latest
+    container_name: springedu-container
+    ports:
+      - "81:9090"
+    volumes:
+      - fileupload-volume:/uploadtest
+    depends_on:
+      - mysql
+    networks:
+      - springboot-mysql-net
+
+volumes:
+  vtest:
+  fileupload-volume:
+
+networks:
+  springboot-mysql-net:
+    driver: bridge
