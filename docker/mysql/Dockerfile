@@ -1,0 +1,8 @@
+FROM mysql:latest
+# MySQL 설정
+ENV MYSQL_ROOT_PASSWORD=1234
+ENV MYSQL_DATABASE=edudb
+ENV MYSQL_USER=jdbctest
+ENV MYSQL_PASSWORD=jdbctest
+# 포트 설정 (기본 MySQL 포트는 3306)
+EXPOSE 3306
